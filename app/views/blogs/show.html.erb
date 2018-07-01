@@ -1,0 +1,12 @@
+<h1>Blog Details</h1>
+<div class="container">
+   <div class="blog-details">
+     <p>Tittle: <%= @blog.title %></p>
+     <p>Content: <%= @blog.content %></p>
+     <%= link_to 'Edit', edit_blog_path, class: 'btn btn-info' %>　　
+   </div>
+
+   <div class="blog-links">
+     <%= link_to 'Back Index', blogs_path, class: 'btn btn-default' %>
+   </div>
+</div>

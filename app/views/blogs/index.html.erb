@@ -1,0 +1,21 @@
+<h1>Index</h1>
+
+<div class="container">
+  <div id="new-blog-link">
+    <%= link_to 'create', new_blog_path, class: 'btn btn-default' %>
+  </div>
+
+  <div class="row">
+    <% @blogs.each do |blog| %>
+      <div class="col-xs-12 col-md-6 blog-panel">
+        <h2><%= blog.title %></h2>
+        <p><%= blog.content %></p>
+        <div class="blog-links">
+          <%= link_to 'Details', blog, class: 'btn btn-default' %>
+          <%= link_to '  Edit ', edit_blog_path(blog), class: 'btn btn-info' %> 　
+          <%= link_to ' Erase ', blog, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
