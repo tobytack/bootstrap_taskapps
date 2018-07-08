@@ -1,5 +1,7 @@
 class BlogsController < ApplicationController
-before_action :set_blog, only: [:show, :edit, :update, :destroy] # destroyアクションを追加
+  before_action :set_blog, only: [:edit,:update,:destroy,:show]
+  before_action :login_check, only: [:new,:edit, :show]
+  
   def index
     @blogs = Blog.all
   end
@@ -46,6 +48,10 @@ before_action :set_blog, only: [:show, :edit, :update, :destroy] # destroyアク
   end
   
   private
+  def user_params
+    params.require(:user).permit(:name, :email, :password,
+                                 :password_confirmation)
+  end
     def blog_params
       params.require(:blog).permit(:title, :content)
     end
@@ -54,4 +60,10 @@ before_action :set_blog, only: [:show, :edit, :update, :destroy] # destroyアク
     def set_blog
       @blog = Blog.find(params[:id])
     end
+
+  def login_check
+    unless current_user
+      redirect_to new_session_path
+    end
+  end
 end

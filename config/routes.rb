@@ -1,8 +1,14 @@
 Rails.application.routes.draw do
-  root to: 'tops#index'
+  get 'sessions/new'
+
+  get '/', to:'tops#index'
   resources :blogs do
     collection do
       post :confirm
-    end
+   end
   end
+  resources :sessions, only: [:new, :create, :destroy]
+  resources :users
+  resources :favorites, only: [:create, :destroy]
+  get '/sessions',to:'sessions#new'
 end
